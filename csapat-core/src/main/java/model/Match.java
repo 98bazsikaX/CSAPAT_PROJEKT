@@ -17,13 +17,16 @@ public class Match {
     *  loosing team
     *   winning team
     *   stats
+    *   DRAW nem lehetséges official versenyen mivel van overtime
     * */
     private IntegerProperty id = new SimpleIntegerProperty(this,"id");
     private ObjectProperty<Tournament> tournament = new SimpleObjectProperty<>(this,"tournament");
     private ObjectProperty<LocalDate> date = new SimpleObjectProperty<>(this,"date");
     private ObjectProperty<PlayableMap> map = new SimpleObjectProperty<>(this,"map");
     private ObjectProperty<Team> winner = new SimpleObjectProperty<>(this,"winner");
+    private IntegerProperty winnerScore = new SimpleIntegerProperty(this,"winnerScore");
     private ObjectProperty<Team> looser = new SimpleObjectProperty<>(this,"looser");
+    private IntegerProperty looserScore = new SimpleIntegerProperty(this,"looserScore");
     private ObjectProperty<ObservableMap<Player,PlayerStatistics>> stats = new SimpleObjectProperty<>(this,"stats");
 
     public int getId() {
@@ -108,5 +111,29 @@ public class Match {
 
     public void setStats(ObservableMap<Player, PlayerStatistics> stats) {
         this.stats.set(stats);
+    }
+
+    public int getWinnerScore() {
+        return winnerScore.get();
+    }
+
+    public IntegerProperty winnerScoreProperty() {
+        return winnerScore;
+    }
+
+    public void setWinnerScore(int winnerScore) {
+        this.winnerScore.set(winnerScore);
+    }
+
+    public int getLooserScore() {
+        return looserScore.get();
+    }
+
+    public IntegerProperty looserScoreProperty() {
+        return looserScore;
+    }
+
+    public void setLooserScore(int looserScore) {
+        this.looserScore.set(looserScore);
     }
 }
