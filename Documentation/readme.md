@@ -15,6 +15,8 @@ Csapat nemzetisége
 Adat lekérdező és módosító műveletek (asztali és web)¶
 Az alábbi lekérdező és módosító funkciók szükségesek:
 
+
+
 Csapatok listázása
 Minden adat listázása
 Nemzetiségre szűrt lista
