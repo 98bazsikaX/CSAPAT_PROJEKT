@@ -8,6 +8,7 @@ import java.time.LocalDate;
 public class Tournament {
 
     /*
+    *   matches
     *   id (database id)
     *   date (local date)
     *   Location (city+country/lan , string)
@@ -27,6 +28,7 @@ public class Tournament {
     private SimpleObjectProperty<ObservableList<Player>> players = new SimpleObjectProperty<>(this,"players");
     private SimpleObjectProperty<Player> mvp = new SimpleObjectProperty<>(this,"mvp");
     private SimpleObjectProperty<Team> winner = new SimpleObjectProperty<>(this,"winner");
+    private SimpleObjectProperty<ObservableList<Match>> matches = new SimpleObjectProperty<>(this,"matches");
 
     public int getId() {
         return id.get();
@@ -122,5 +124,17 @@ public class Tournament {
 
     public void setWinner(Team winner) {
         this.winner.set(winner);
+    }
+
+    public ObservableList<Match> getMatches() {
+        return matches.get();
+    }
+
+    public SimpleObjectProperty<ObservableList<Match>> matchesProperty() {
+        return matches;
+    }
+
+    public void setMatches(ObservableList<Match> matches) {
+        this.matches.set(matches);
     }
 }

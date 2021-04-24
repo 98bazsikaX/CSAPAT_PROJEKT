@@ -29,6 +29,7 @@ public class Match {
     private IntegerProperty looserScore = new SimpleIntegerProperty(this,"looserScore");
     private ObjectProperty<ObservableMap<Player,PlayerStatistics>> stats = new SimpleObjectProperty<>(this,"stats");
 
+
     public int getId() {
         return id.get();
     }

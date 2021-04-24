@@ -11,7 +11,7 @@ public class Organization {
     *   name (string)
     *   matches (org-nal jatszott meccsek, match list)
     *   foundationDate
-    *   events (events obj lista)
+    *   events (tournaments obj lista)
     * */
 
     private IntegerProperty id = new SimpleIntegerProperty(this,"id");

@@ -3,8 +3,10 @@ package model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+
 public enum StatType {
-    //TODO: implement
+    //TODO: kesobb nagy esellyel torolni mert ez egy retardalt osztaly ami semmire sem jo
+
     MATCH("Match"),
     GLOBAL("Global");
 
