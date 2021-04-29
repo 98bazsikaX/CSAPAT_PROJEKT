@@ -20,24 +20,25 @@ public class Player extends User{
     * */
 
 
-    private ObjectProperty<Role> role = new SimpleObjectProperty<>(this,"role");
+    //private ObjectProperty<Role> role = new SimpleObjectProperty<>(this,"role");
+    private StringProperty role = new SimpleStringProperty(this,"role");
     private ObjectProperty<ObservableList<Team>> teams = new SimpleObjectProperty<>(this,"teams");
     private BooleanProperty active = new SimpleBooleanProperty(this,"active");
 
     public Player() {
-        super.setType(UserType.valueOf("Player"));
+        //super.setType(UserType.valueOf("Player"));
     }
 
 
-    public Role getRole() {
+    public String getRole() {
         return role.get();
     }
 
-    public ObjectProperty<Role> roleProperty() {
+    public StringProperty roleProperty() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role.set(role);
     }
 

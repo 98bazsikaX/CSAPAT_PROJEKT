@@ -2,12 +2,15 @@ package hu.alkfejl;
 
 import dao.MapDAO;
 import dao.MapDAOImpl;
+import dao.PlayerDAO;
+import dao.PlayerDAOImpl;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import model.PlayableMap;
+import model.Player;
 
 import java.util.List;
 
@@ -19,12 +22,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
 
-        MapDAO dao = new MapDAOImpl();
-
-        PlayableMap asd = dao.findByName("Dust 2");
+        PlayerDAO dao= new PlayerDAOImpl();
+        Player asd = dao.findById(1);
         var str = ((asd==null)?("not found") : (asd.getName()));
 
         var label = new Label(str);

@@ -18,6 +18,31 @@ public enum Role {
     Role(String value) {
         this.value.set(value);
     }
+    Role(int value){
+        switch (value) {
+            case 0:
+                this.setValue("Lurk");
+                break;
+            case 1:
+                this.setValue("AWP");
+                break;
+            case 2:
+                this.setValue("Entry fragger");
+                break;
+            case 3:
+                this.setValue("Support");
+                break;
+            case 4:
+                this.setValue("In game leader");
+                break;
+            case 5:
+                this.setValue("Coach");
+                break;
+            default:
+                this.setValue("Unknown");
+                break;
+        }
+    }
 
     public String getValue() {
         return value.get();

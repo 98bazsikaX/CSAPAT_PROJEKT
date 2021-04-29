@@ -11,19 +11,8 @@ public abstract class User {
     protected BooleanProperty online = new SimpleBooleanProperty(this,"online");
     protected StringProperty nationality = new SimpleStringProperty(this,"nationality");
     protected ObjectProperty<LocalDate> birthDate = new SimpleObjectProperty<>(this, "birthDate");
-    protected ObjectProperty<UserType> type;
+   // protected ObjectProperty<UserType> type;
 
-    public UserType getType() {
-        return type.get();
-    }
-
-    public ObjectProperty<UserType> typeProperty() {
-        return type;
-    }
-
-    protected void setType(UserType type) {
-        this.type.set(type);
-    }
 
     public int getId() {
         return id.get();

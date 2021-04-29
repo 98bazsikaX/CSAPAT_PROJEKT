@@ -26,7 +26,7 @@ public class Tournament {
     private SimpleObjectProperty<Organization> organizer = new SimpleObjectProperty<>(this,"organizer");
     private SimpleObjectProperty<ObservableList<Team>> teams = new SimpleObjectProperty<>(this,"teams");
     private SimpleObjectProperty<ObservableList<Player>> players = new SimpleObjectProperty<>(this,"players");
-    private SimpleObjectProperty<Player> mvp = new SimpleObjectProperty<>(this,"mvp");
+//    private SimpleObjectProperty<Player> mvp = new SimpleObjectProperty<>(this,"mvp");
     private SimpleObjectProperty<Team> winner = new SimpleObjectProperty<>(this,"winner");
     private SimpleObjectProperty<ObservableList<Match>> matches = new SimpleObjectProperty<>(this,"matches");
 
@@ -102,17 +102,17 @@ public class Tournament {
         this.players.set(players);
     }
 
-    public Player getMvp() {
-        return mvp.get();
-    }
+//    public Player getMvp() {
+//        return mvp.get();
+//    }
 
-    public SimpleObjectProperty<Player> mvpProperty() {
-        return mvp;
-    }
+//    public SimpleObjectProperty<Player> mvpProperty() {
+//        return mvp;
+//    }
 
-    public void setMvp(Player mvp) {
-        this.mvp.set(mvp);
-    }
+//    public void setMvp(Player mvp) {
+//        this.mvp.set(mvp);
+//    }
 
     public Team getWinner() {
         return winner.get();
