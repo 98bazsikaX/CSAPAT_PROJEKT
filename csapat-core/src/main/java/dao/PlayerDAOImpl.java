@@ -21,7 +21,7 @@ public class PlayerDAOImpl implements PlayerDAO{
     private static final String SELECT_BY_DB_ID = "SELECT * FROM USERS WHERE isAdmin=0 AND id=?";
     private static final String DELETE_PLAYER = "DELETE FROM USERS WHERE id=?";
     private static final String INSERT_INTO_USERS = "INSERT INTO USERS(isAdmin,name,username,role,nationality,birthDate,active) VALUES(?,?,?,?,?,?,?)";
-    private static final String UPDATE_USERS = "UPDATE USERS SET isAdmin=? name=? username=? role=? nationality=? birthDate=? active=? WHERE id=?";
+    private static final String UPDATE_USERS = "UPDATE users SET name=? , username=?, role=?, nationality=? ,birthDate=? , active=? WHERE id=?";
     private String CONN_URL;
 
     public PlayerDAOImpl(){
@@ -204,16 +204,15 @@ public class PlayerDAOImpl implements PlayerDAO{
                 statement = connection.prepareStatement(INSERT_INTO_USERS,Statement.RETURN_GENERATED_KEYS);
             }else{
                 statement = connection.prepareStatement(UPDATE_USERS);
-                statement.setInt(8,player.getId());
+                statement.setInt(7,player.getId());
             }
 
-            statement.setInt(1,0);
-            statement.setString(2,player.getName());
-            statement.setString(3,player.getUsername());
-            statement.setString(4,player.getRole());
-            statement.setString(5,player.getNationality());
-            statement.setString(6,player.getBirthDate().toString());
-            statement.setInt(7,player.isActive() ? 1:0);
+            statement.setString(1,player.getName());
+            statement.setString(2,player.getUsername());
+            statement.setString(3,player.getRole());
+            statement.setString(4,player.getNationality());
+            statement.setString(5,player.getBirthDate().toString());
+            statement.setInt(6,player.isActive() ? 1:0);
 
             int affected = statement.executeUpdate();
             if(affected==0){

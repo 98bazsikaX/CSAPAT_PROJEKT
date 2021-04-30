@@ -19,7 +19,7 @@ public class MapDAOImpl implements MapDAO {
     private final String SELECT_ALL = "SELECT * FROM MAPS";
 
     private static final String INSERT_INTO_MAPS = "INSERT INTO MAPS (ingame_id , name) VALUES(?,?)";
-    private static final String UPDATE_MAPS ="UPDATE MAPS SET ingame_id=? name=? WHERE id=?";
+    private static final String UPDATE_MAPS ="UPDATE MAPS SET ingame_id=?, name=? WHERE id=?";
 
     private String CONN_URL;
 

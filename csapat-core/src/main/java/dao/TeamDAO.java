@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface TeamDAO {
 
+    List<Team> findAll();
+
     List<Team> getByPlayerID(Player player);
     List<Team> getByPlayerID(int id); /*mindig ezt hivjuk meg*/
 
