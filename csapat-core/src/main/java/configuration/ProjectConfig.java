@@ -11,9 +11,7 @@ public class ProjectConfig {
     static {
         try {
             properties.load(ProjectConfig.class.getResourceAsStream("/application.properties"));
-
         } catch (IOException e) {
-            //TODO: inkább throwolja azt gui-ban megfogni
             e.printStackTrace();
         }
     }

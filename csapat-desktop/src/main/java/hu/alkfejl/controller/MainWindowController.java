@@ -1,5 +1,7 @@
 package hu.alkfejl.controller;
 
+import dao.OrgDAO;
+import dao.OrgDAOImpl;
 import dao.PlayerDAO;
 import dao.PlayerDAOImpl;
 import hu.alkfejl.App;
@@ -31,10 +33,14 @@ public class MainWindowController implements Initializable {
     @FXML
     private TableColumn<Player,Void> OptionsColumn;
 
+    private URL url;
+    private ResourceBundle b;
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.url = url;
+        this.b = resourceBundle;
         refreshTable();
 
         userName.setCellValueFactory(new PropertyValueFactory<>("username"));
@@ -79,14 +85,14 @@ public class MainWindowController implements Initializable {
 
     public void showMaps(){
         FXMLLoader asd =   App.loadFXML("/fxml/showMaps.fxml");
-        MapController yolo = asd.getController();
-        yolo.initialize();
     }
 
     public void showTeams(){
         FXMLLoader asd = App.loadFXML("/fxml/showTeams.fxml");
-        TeamController controller = asd.getController();
-        controller.initialize();
+    }
+
+    public void showOrgs(){
+        App.loadFXML("/fxml/showOrgs.fxml");
     }
 
     @FXML

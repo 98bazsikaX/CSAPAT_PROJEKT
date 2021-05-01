@@ -15,9 +15,6 @@ public interface TeamDAO {
     Team getById(Team team);
     Team getById(int id);
 
-    Team getByName(Team team);
-    Team getByName(String name);
-
     Team save(Team team);
     void delete(Team team);
 }

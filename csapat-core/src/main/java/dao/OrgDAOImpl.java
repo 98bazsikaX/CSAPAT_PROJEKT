@@ -10,6 +10,10 @@ import java.util.List;
 
 public class OrgDAOImpl implements OrgDAO{
 
+    private static final String INSERT = "INSERT INTO ORG (name, foundation_date) VALUES (?,?)";
+    private static final String UPDATE = "UPDATE ORG SET name=? , foundation_date=? where id=?";
+    private static final String DELETE = "DELETE FROM ORG WHERE id=?";
+    private static final String SELECT_BY_ID = "SELECT * FROM ORG WHERE id=?";
     private final String SELECT_ALL = "SELECT * FROM ORG";
     private String CONN_URL ;
 
@@ -18,7 +22,7 @@ public class OrgDAOImpl implements OrgDAO{
     }
 
     @Override
-    public List<Organization> findAll(Organization org) {
+    public List<Organization> findAll() {
         List<Organization> orgs = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection(CONN_URL);
             PreparedStatement statement = conn.prepareStatement(SELECT_ALL)
@@ -43,21 +47,74 @@ public class OrgDAOImpl implements OrgDAO{
 
     @Override
     public Organization findByID(Organization org) {
-        return null;
+        return findByID(org.getId());
     }
 
     @Override
-    public Organization findByName(Organization org) {
-        return null;
+    public Organization findByID(int id) {
+        Organization org = new Organization();
+
+        try (Connection conn = DriverManager.getConnection(CONN_URL);
+            PreparedStatement statement = conn.prepareStatement(SELECT_BY_ID)
+        ){
+
+            ResultSet set = statement.executeQuery();
+            if(!set.next()){
+                return null;
+            }
+            org.setName(set.getString("name"));
+            Date f = Date.valueOf(set.getString("foundation_date"));
+            org.setFoundation(f.toLocalDate()==null ? LocalDate.EPOCH : f.toLocalDate());
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return org;
     }
 
     @Override
-    public Organization save(Organization org) {
-        return null;
+    public Organization save(Organization org){
+
+        try(Connection conn = DriverManager.getConnection(CONN_URL)){
+            PreparedStatement statement;
+            if(org.getId()<=0){
+                statement = conn.prepareStatement(INSERT,Statement.RETURN_GENERATED_KEYS);
+            }else{
+                statement = conn.prepareStatement(UPDATE);
+                statement.setInt(3,org.getId());
+            }
+            int affected = statement.executeUpdate();
+            if(affected==0){
+                return null;
+            }
+
+            if(org.getId()<=0){
+                ResultSet set = statement.getGeneratedKeys();
+                if(set.next()){
+                    org.setId(set.getInt(1));
+                }
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return null;
+        }
+
+        return org;
     }
 
     @Override
     public void delete(Organization org) {
+        try(Connection conn = DriverManager.getConnection(CONN_URL);
+            PreparedStatement statement = conn.prepareStatement(DELETE)
+        ){
+            statement.setInt(1,org.getId());
+            statement.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
 }

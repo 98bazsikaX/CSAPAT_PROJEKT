@@ -1434,7 +1434,9 @@
     </foreign-key>
     <column id="518" parent="172" name="id">
       <Position>1</Position>
-      <DataType>int|0s</DataType>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>null</SequenceIdentity>
     </column>
     <column id="519" parent="172" name="name">
       <Position>2</Position>
@@ -1444,49 +1446,42 @@
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <index id="521" parent="172" name="sqlite_autoindex_ORG_1">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <ColumnCollations></ColumnCollations>
-      <Unique>1</Unique>
-    </index>
-    <key id="522" parent="172" name="ORG_pk">
+    <key id="521" parent="172" name="ORG_pk">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>sqlite_autoindex_ORG_1</UnderlyingIndexName>
     </key>
-    <column id="523" parent="173" name="id">
+    <column id="522" parent="173" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="524" parent="173" name="player_id">
+    <column id="523" parent="173" name="player_id">
       <Position>2</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="525" parent="173" name="team_id">
+    <column id="524" parent="173" name="team_id">
       <Position>3</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="526" parent="173" name="from">
+    <column id="525" parent="173" name="from">
       <Position>4</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="527" parent="173" name="to">
+    <column id="526" parent="173" name="to">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <index id="528" parent="173" name="sqlite_autoindex_PLAYED_IN_1">
+    <index id="527" parent="173" name="sqlite_autoindex_PLAYED_IN_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="529" parent="173" name="PLAYED_IN_pk">
+    <key id="528" parent="173" name="PLAYED_IN_pk">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_PLAYED_IN_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="530" parent="173">
+    <foreign-key id="529" parent="173">
       <ColNames>player_id</ColNames>
       <RefTableName>USERS</RefTableName>
       <RefKeyName>USERS_pk</RefKeyName>
@@ -1494,7 +1489,7 @@
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <foreign-key id="531" parent="173">
+    <foreign-key id="530" parent="173">
       <ColNames>team_id</ColNames>
       <RefTableName>TEAMS</RefTableName>
       <RefKeyName>TEAM_pk</RefKeyName>
@@ -1502,208 +1497,208 @@
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <column id="532" parent="174" name="id">
+    <column id="531" parent="174" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="533" parent="174" name="kills">
+    <column id="532" parent="174" name="kills">
       <Position>2</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="534" parent="174" name="deaths">
+    <column id="533" parent="174" name="deaths">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="535" parent="174" name="assists">
+    <column id="534" parent="174" name="assists">
       <Position>4</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="536" parent="174" name="mvp">
+    <column id="535" parent="174" name="mvp">
       <Position>5</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="537" parent="174" name="adr">
+    <column id="536" parent="174" name="adr">
       <Position>6</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="538" parent="174" name="hs_percentage">
+    <column id="537" parent="174" name="hs_percentage">
       <Position>7</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="539" parent="174" name="player_id">
+    <column id="538" parent="174" name="player_id">
       <Position>8</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="540" parent="174" name="match_id">
+    <column id="539" parent="174" name="match_id">
       <Position>9</Position>
       <DataType>int|0s</DataType>
     </column>
-    <key id="541" parent="174" name="STATISTICS_pk">
+    <key id="540" parent="174" name="STATISTICS_pk">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="542" parent="174">
+    <foreign-key id="541" parent="174">
       <ColNames>player_id</ColNames>
       <RefTableName>USERS</RefTableName>
       <RefKeyName>USERS_pk</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="543" parent="174">
+    <foreign-key id="542" parent="174">
       <ColNames>match_id</ColNames>
       <RefTableName>MATCH</RefTableName>
       <RefKeyName>MATCH_pk</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="544" parent="175" name="id">
+    <column id="543" parent="175" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="545" parent="175" name="name">
+    <column id="544" parent="175" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="546" parent="175" name="nationality">
+    <column id="545" parent="175" name="nationality">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="547" parent="175" name="founded">
+    <column id="546" parent="175" name="founded">
       <Position>4</Position>
       <DataType>text|0s</DataType>
     </column>
-    <index id="548" parent="175" name="TEAM_id_uindex">
+    <index id="547" parent="175" name="TEAM_id_uindex">
       <ColNames>id</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="549" parent="175" name="TEAM_pk">
+    <key id="548" parent="175" name="TEAM_pk">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>TEAM_id_uindex</UnderlyingIndexName>
     </key>
-    <column id="550" parent="176" name="id">
+    <column id="549" parent="176" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="551" parent="176" name="name">
+    <column id="550" parent="176" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="552" parent="176" name="date">
+    <column id="551" parent="176" name="date">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="553" parent="176" name="location">
+    <column id="552" parent="176" name="location">
       <Position>4</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="554" parent="176" name="orgId">
+    <column id="553" parent="176" name="orgId">
       <Position>5</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="555" parent="176" name="winner_id">
+    <column id="554" parent="176" name="winner_id">
       <Position>6</Position>
       <DataType>int|0s</DataType>
     </column>
-    <index id="556" parent="176" name="sqlite_autoindex_TOURNAMENTS_1">
+    <index id="555" parent="176" name="sqlite_autoindex_TOURNAMENTS_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="557" parent="176" name="TOURNAMENTS_pk">
+    <key id="556" parent="176" name="TOURNAMENTS_pk">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_TOURNAMENTS_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="558" parent="176">
+    <foreign-key id="557" parent="176">
       <ColNames>orgId</ColNames>
       <RefTableName>ORG</RefTableName>
       <RefKeyName>ORG_pk</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="559" parent="176">
+    <foreign-key id="558" parent="176">
       <ColNames>winner_id</ColNames>
       <RefTableName>TEAMS</RefTableName>
       <RefKeyName>TEAM_pk</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="560" parent="177" name="id">
+    <column id="559" parent="177" name="id">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="561" parent="177" name="isAdmin">
+    <column id="560" parent="177" name="isAdmin">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <column id="562" parent="177" name="name">
+    <column id="561" parent="177" name="name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="563" parent="177" name="username">
+    <column id="562" parent="177" name="username">
       <Position>4</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="564" parent="177" name="role">
+    <column id="563" parent="177" name="role">
       <Position>5</Position>
       <DataType>text|0s</DataType>
       <DefaultExpression>null</DefaultExpression>
     </column>
-    <column id="565" parent="177" name="nationality">
+    <column id="564" parent="177" name="nationality">
       <Position>6</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="566" parent="177" name="birthDate">
+    <column id="565" parent="177" name="birthDate">
       <Position>7</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="567" parent="177" name="active">
+    <column id="566" parent="177" name="active">
       <Position>8</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>null</DefaultExpression>
     </column>
-    <key id="568" parent="177" name="USERS_pk">
+    <key id="567" parent="177" name="USERS_pk">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="569" parent="178" name="type">
+    <column id="568" parent="178" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="570" parent="178" name="name">
+    <column id="569" parent="178" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="571" parent="178" name="tbl_name">
+    <column id="570" parent="178" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="572" parent="178" name="rootpage">
+    <column id="571" parent="178" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="573" parent="178" name="sql">
+    <column id="572" parent="178" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="574" parent="179" name="name">
+    <column id="573" parent="179" name="name">
       <Position>1</Position>
     </column>
-    <column id="575" parent="179" name="seq">
+    <column id="574" parent="179" name="seq">
       <Position>2</Position>
     </column>
   </database-model>

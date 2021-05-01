@@ -1,6 +1,7 @@
 package dao;
 
 import configuration.ProjectConfig;
+import javafx.collections.ObservableList;
 import model.Player;
 import model.Team;
 
@@ -15,7 +16,9 @@ public class TeamDAOImpl implements TeamDAO{
     private static final String INSERT_INTO_TEAMS = "INSERT INTO TEAMS(name, nationality, founded) VALUES (?,?,?)";
     private static final String UPDATE_TEAM = "UPDATE TEAMS SET name=?,nationality=?,founded=? WHERE id=?";
     private static final String DELETE_TEAM = "DELETE FROM TEAMS WHERE id=?";
+    private static final String GET_BY_ID = "SELECT * FROM TEAMS WHERE id=?";
     private String CONN_URL;
+    private PlayerDAO player = new PlayerDAOImpl();
 
     public TeamDAOImpl(){
         this.CONN_URL = ProjectConfig.getValue("db.url");
@@ -35,6 +38,7 @@ public class TeamDAOImpl implements TeamDAO{
                 toadd.setId(set.getInt("id"));
                 toadd.setName(set.getString("name"));
                 toadd.setNationality(set.getString("nationality"));
+                toadd.setPlayers((ObservableList<Player>) player.findByCurrentTeam(toadd.getId()));
 
                 toadd.setFounded(LocalDate.parse(set.getString("founded")));
 
@@ -64,18 +68,29 @@ public class TeamDAOImpl implements TeamDAO{
 
     @Override
     public Team getById(int id) {
-        return null;
+        Team retval = new Team();
+        try(Connection c = DriverManager.getConnection(CONN_URL);
+            PreparedStatement s = c.prepareStatement(GET_BY_ID);
+        ){
+            s.setInt(1,id);
+            ResultSet set = s.executeQuery();
+
+            if(!set.next()){
+                return null;
+            }
+                retval.setId(set.getInt("id"));
+                retval.setName(set.getString("name"));
+                retval.setNationality(set.getString("nationality"));
+                Date founded =  Date.valueOf(set.getString("founded"));
+                retval.setFounded(founded.toLocalDate());
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return retval;
     }
 
-    @Override
-    public Team getByName(Team team) {
-        return getByName(team.getName());
-    }
-
-    @Override
-    public Team getByName(String name) {
-        return null;
-    }
 
     @Override
     public Team save(Team team) {

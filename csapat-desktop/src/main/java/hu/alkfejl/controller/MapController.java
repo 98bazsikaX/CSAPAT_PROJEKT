@@ -17,7 +17,7 @@ import java.util.Collection;
 import java.util.ResourceBundle;
 
 
-public class MapController {
+public class MapController implements Initializable{
 
     MapDAO dao = new MapDAOImpl();
 
@@ -33,9 +33,14 @@ public class MapController {
     @FXML
     private TableColumn<PlayableMap,Void> OptionsColumn;
 
+    private URL url;
+    private ResourceBundle b;
 
-    //@Override
-    public void initialize() {
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.url = url;
+        this.b = resourceBundle;
         mapIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         mapNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 
@@ -77,8 +82,7 @@ public class MapController {
     }
 
     private void refreshTable() {
-        //System.out.println(dao.findAll()==null);
-        mapTable.getItems().setAll((Collection<PlayableMap>) dao.findAll() );
+        mapTable.getItems().setAll(dao.findAll() );
     }
 
     public void newMap(){
@@ -99,8 +103,12 @@ public class MapController {
     }
 
     private void deleteMap(PlayableMap m){
-        //TODO: biztos?
-        dao.delete(m);
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,"Biztos törölni akarja a pályát?" ,ButtonType.APPLY,ButtonType.CANCEL);
+        confirm.showAndWait().ifPresent(buttonType -> {
+            if(buttonType.equals(ButtonType.APPLY)){
+                dao.delete(m);
+            }
+        });
     }
 
     public void exit(){

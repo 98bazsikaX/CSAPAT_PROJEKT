@@ -14,8 +14,6 @@ public class PlayerStatistics {
     *   adr (int 0<=)
     *   hs (float 0<=)
     *   k/d (float, fuggveny only)
-    *   IMPORTANT TODO: Adatbazisban csak a meccsek statjait taroljuk, es lekerdezesnel takolunk!!!!
-    *              TODO: inkabb a match statot
     * */
     private IntegerProperty id = new SimpleIntegerProperty(this,"id");
     private ObjectProperty<Player> player = new SimpleObjectProperty<>(this,"player");

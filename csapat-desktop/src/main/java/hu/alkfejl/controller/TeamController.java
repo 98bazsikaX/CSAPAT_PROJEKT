@@ -5,19 +5,16 @@ import dao.TeamDAOImpl;
 import hu.alkfejl.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import model.Team;
 
-public class TeamController {
-    /**
-     * TODO: IMPLEMENT switching to other windows
-     */
+import java.net.URL;
+import java.util.ResourceBundle;
 
+public class TeamController implements Initializable {
 
     TeamDAO teamDAO = new TeamDAOImpl();
 
@@ -36,12 +33,19 @@ public class TeamController {
     private TableColumn<Team,String> teamNationalityColumn;
 
     @FXML
-    private TableColumn<Team,Integer> teamFoundedColumn;
+    private TableColumn<Team,String> teamFoundedColumn;
 
     @FXML
     private TableColumn<Team,Void> settingsColumn;
 
-    public void initialize(){
+    private URL url;
+    private ResourceBundle b;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle){
+        this.url=url;
+        this.b = resourceBundle;
         teamIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         teamNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         teamNationalityColumn.setCellValueFactory(new PropertyValueFactory<>("nationality"));
@@ -82,12 +86,10 @@ public class TeamController {
 
     public void players(){
         App.loadFXML("/fxml/mainWindow.fxml");
-
     }
 
     public void maps(){
-        App.loadFXML("/fxml/MapController");
-
+        App.loadFXML("/fxml/showMaps.fxml");
     }
 
     private void refreshTable() {
@@ -109,7 +111,13 @@ public class TeamController {
     }
 
     private void delete(Team t){
-        //TODO: Implement
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,"Biztos törölni akarja a csapatot?" ,ButtonType.APPLY,ButtonType.CANCEL);
+        confirm.showAndWait().ifPresent(buttonType -> {
+            if(buttonType.equals(ButtonType.APPLY)){
+               teamDAO.delete(t);
+            }
+        });
+
     }
 
 }

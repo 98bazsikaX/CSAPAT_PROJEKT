@@ -1,21 +1,14 @@
 package hu.alkfejl;
 
-import dao.MapDAO;
-import dao.MapDAOImpl;
-import dao.PlayerDAO;
-import dao.PlayerDAOImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
+
 import javafx.stage.Stage;
-import model.PlayableMap;
-import model.Player;
 
 import java.io.IOException;
-import java.util.List;
+
 
 
 /**
@@ -28,7 +21,6 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
 
-
         App.stage = stage;
         App.loadFXML("/fxml/mainWindow.fxml");
 
@@ -40,7 +32,7 @@ public class App extends Application {
         Scene scene = null;
         try {
            Parent root =  loader.load();
-           scene = new Scene(root);
+           scene = new Scene(root,720,720);
         } catch (IOException e) {
             e.printStackTrace();
         }
