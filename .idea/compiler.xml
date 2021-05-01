@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="csapat-desktop" />
-        <module name="webapp" />
         <module name="csapat-core" />
+        <module name="csapat-webapp" />
       </profile>
     </annotationProcessing>
   </component>
