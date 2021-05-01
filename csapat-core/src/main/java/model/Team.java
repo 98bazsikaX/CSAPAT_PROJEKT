@@ -3,6 +3,8 @@ package model;
 import javafx.beans.property.*;
 import javafx.collections.ObservableList;
 
+import java.time.LocalDate;
+
 public class Team {
     /*
     *   id (Database id)
@@ -16,7 +18,9 @@ public class Team {
     private StringProperty name = new SimpleStringProperty(this,"name");
     private StringProperty nationality = new SimpleStringProperty(this,"nationality");
     private ObjectProperty<ObservableList<Player>> players = new SimpleObjectProperty<>(this,"players"); //Current players
-    private IntegerProperty founded = new SimpleIntegerProperty(this,"founded");
+    //private IntegerProperty founded = new SimpleIntegerProperty(this,"founded");
+
+    private ObjectProperty<LocalDate> founded = new SimpleObjectProperty<>(this,"founded");
 
     public int getId() {
         return id.get();
@@ -66,15 +70,15 @@ public class Team {
         this.players.set(players);
     }
 
-    public int getFounded() {
+    public LocalDate getFounded() {
         return founded.get();
     }
 
-    public IntegerProperty foundedProperty() {
+    public ObjectProperty<LocalDate> foundedProperty() {
         return founded;
     }
 
-    public void setFounded(int founded) {
+    public void setFounded(LocalDate founded) {
         this.founded.set(founded);
     }
 }

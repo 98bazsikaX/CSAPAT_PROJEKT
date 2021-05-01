@@ -21,7 +21,7 @@ public class PlayerDAOImpl implements PlayerDAO{
     private static final String SELECT_BY_DB_ID = "SELECT * FROM USERS WHERE isAdmin=0 AND id=?";
     private static final String DELETE_PLAYER = "DELETE FROM USERS WHERE id=?";
     private static final String INSERT_INTO_USERS = "INSERT INTO USERS(isAdmin,name,username,role,nationality,birthDate,active) VALUES(?,?,?,?,?,?,?)";
-    private static final String UPDATE_USERS = "UPDATE users SET name=? , username=?, role=?, nationality=? ,birthDate=? , active=? WHERE id=?";
+    private static final String UPDATE_USERS = "UPDATE users SET isAdmin=0 , name=? , username=?, role=?, nationality=? ,birthDate=? , active=? WHERE id=?";
     private String CONN_URL;
 
     public PlayerDAOImpl(){
@@ -242,10 +242,5 @@ public class PlayerDAOImpl implements PlayerDAO{
             throwables.printStackTrace();
         }
 
-    }
-
-
-    private boolean isCurrent(String from, String to) {
-        return true;
     }
 }

@@ -23,7 +23,6 @@ public class AddEditMap {
         this.map = m;
 
         ingameId.textProperty().bindBidirectional(map.idProperty());
-        //ingameId.textProperty().bindBidirectional(map.nameProperty());
         name.textProperty().bindBidirectional(map.nameProperty());
     }
 

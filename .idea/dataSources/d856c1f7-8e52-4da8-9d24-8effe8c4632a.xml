@@ -1579,7 +1579,7 @@
     </column>
     <column id="547" parent="175" name="founded">
       <Position>4</Position>
-      <DataType>int|0s</DataType>
+      <DataType>text|0s</DataType>
     </column>
     <index id="548" parent="175" name="TEAM_id_uindex">
       <ColNames>id</ColNames>

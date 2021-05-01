@@ -47,7 +47,6 @@ public class MainWindowController implements Initializable {
               { //STATIKUS CUCC__________________________________
                    deleteButton.setOnAction(event -> {
                         Player player =  getTableRow().getItem();
-                        //dao.delete(player);
                        deletePlayer(player);
                         refreshTable();
 
@@ -55,7 +54,6 @@ public class MainWindowController implements Initializable {
 
                    editButton.setOnAction(event -> {
                         Player p =  getTableRow().getItem();
-                        //TODO: megnezni mikor zizo csinalja
                        editPlayer(p);
                         refreshTable();
                    });
@@ -75,6 +73,7 @@ public class MainWindowController implements Initializable {
                 }
             }
         });
+
 
     }
 

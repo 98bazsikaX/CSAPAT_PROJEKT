@@ -2,7 +2,9 @@ package hu.alkfejl.controller;
 
 import dao.TeamDAO;
 import dao.TeamDAOImpl;
+import hu.alkfejl.App;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -12,6 +14,11 @@ import javafx.scene.layout.HBox;
 import model.Team;
 
 public class TeamController {
+    /**
+     * TODO: IMPLEMENT switching to other windows
+     */
+
+
     TeamDAO teamDAO = new TeamDAOImpl();
 
 
@@ -73,6 +80,16 @@ public class TeamController {
         refreshTable();
     }
 
+    public void players(){
+        App.loadFXML("/fxml/mainWindow.fxml");
+
+    }
+
+    public void maps(){
+        App.loadFXML("/fxml/MapController");
+
+    }
+
     private void refreshTable() {
         teamTable.getItems().setAll(teamDAO.findAll());
     }
@@ -85,7 +102,10 @@ public class TeamController {
     }
 
     private void editTeam(Team t) {
-        //TODO: IMPLEMENT
+        FXMLLoader fxmlLoader = App.loadFXML("/fxml/add_edit_team.fxml");
+        AddEditTeam controller = fxmlLoader.getController();
+        controller.setTeam(t);
+        refreshTable();
     }
 
     private void delete(Team t){

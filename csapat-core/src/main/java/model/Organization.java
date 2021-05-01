@@ -18,7 +18,8 @@ public class Organization {
     private StringProperty name = new SimpleStringProperty(this,"name");
     private ObjectProperty<ObservableList<Match>> matches = new SimpleObjectProperty<>(this,"matches");
     private ObjectProperty<ObservableList<Tournament>> tournaments = new SimpleObjectProperty<>(this,"matches");
-    private IntegerProperty foundationYear = new SimpleIntegerProperty(this,"foundationYear");
+    //private IntegerProperty foundationYear = new SimpleIntegerProperty(this,"foundationYear");
+    private ObjectProperty<LocalDate> foundation = new SimpleObjectProperty<>(this,"foundation");
 
     public int getId() {
         return id.get();
@@ -68,15 +69,15 @@ public class Organization {
         this.tournaments.set(tournaments);
     }
 
-    public int getFoundationYear() {
-        return foundationYear.get();
+    public LocalDate getFoundation() {
+        return foundation.get();
     }
 
-    public IntegerProperty foundationYearProperty() {
-        return foundationYear;
+    public ObjectProperty<LocalDate> foundationProperty() {
+        return foundation;
     }
 
-    public void setFoundationYear(int foundationYear) {
-        this.foundationYear.set(foundationYear);
+    public void setFoundation(LocalDate foundation) {
+        this.foundation.set(foundation);
     }
 }

@@ -35,8 +35,8 @@
    <left>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Térképek" />
-            <Button mnemonicParsing="false" text="Játékosok" />
+            <Button onAction="#maps" mnemonicParsing="false" text="Térképek" />
+            <Button onAction="#players" mnemonicParsing="false" text="Játékosok" />
          </children>
       </VBox>
    </left>

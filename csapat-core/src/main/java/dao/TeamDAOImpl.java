@@ -5,6 +5,7 @@ import model.Player;
 import model.Team;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +35,8 @@ public class TeamDAOImpl implements TeamDAO{
                 toadd.setId(set.getInt("id"));
                 toadd.setName(set.getString("name"));
                 toadd.setNationality(set.getString("nationality"));
-                toadd.setFounded(set.getInt("founded"));
+
+                toadd.setFounded(LocalDate.parse(set.getString("founded")));
 
                 retval.add(toadd);
             }
@@ -86,8 +88,8 @@ public class TeamDAOImpl implements TeamDAO{
                 statement.setInt(4,team.getId());
             }
             statement.setString(1,team.getName());
-            statement.setString(2,team.getName());
-            statement.setInt(3,team.getFounded());
+            statement.setString(2,team.getNationality());
+            statement.setString(3,team.getFounded().toString());
 
             int affectedRows = statement.executeUpdate();
 
