@@ -82,18 +82,26 @@ public class OrgController implements Initializable {
         });
     }
 
+    public void addOrg(){
+        Organization org = new Organization();
+        editOrg(org);
+    }
+
     private void editOrg(Organization org) {
+        FXMLLoader loader = App.loadFXML("/fxml/add_edit_org.fxml");
+        AddEditOrg edit = loader.getController();
+        edit.setOrg(org);
+        refreshTable();
+
+    }
+
+    private void deleteOrg(Organization org) {
         Alert confirm = new Alert(Alert.AlertType.CONFIRMATION,"Biztos törölni akarja a céget?" ,ButtonType.APPLY,ButtonType.CANCEL);
         confirm.showAndWait().ifPresent(buttonType -> {
             if(buttonType.equals(ButtonType.APPLY)){
                 dao.delete(org);
             }
         });
-
-    }
-
-    private void deleteOrg(Organization org) {
-
     }
 
     private void refreshTable() {
@@ -101,9 +109,8 @@ public class OrgController implements Initializable {
     }
 
     public void showPlayer(){
-        FXMLLoader players = App.loadFXML("/fxml/mainWindow.fxml");
-        MainWindowController controller = players.getController();
-        controller.initialize(url,b);
+        App.loadFXML("/fxml/mainWindow.fxml");
+
     }
 
 }

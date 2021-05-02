@@ -80,4 +80,5 @@ public class Organization {
     public void setFoundation(LocalDate foundation) {
         this.foundation.set(foundation);
     }
+
 }

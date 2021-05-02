@@ -1,11 +1,8 @@
 package dao;
 
 import configuration.ProjectConfig;
-import javafx.collections.FXCollections;
 import model.Player;
-import model.Role;
 import model.Team;
-import model.Tournament;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -15,13 +12,9 @@ import java.util.List;
 public class PlayerDAOImpl implements PlayerDAO{
 
     private static final String SELECT_ALL = "SELECT * FROM USERS WHERE isAdmin=0";
-    private static final String SELECT_BY_CURRENT_TEAM = "SELECT * FROM USERS INNER JOIN PLAYED_IN ON USERS.id=PLAYED_IN.player_id WHERE team_id=? AND isAdmin=0 AND to=null ";
-    private static final String SELECT_BY_ROLE = "SELECT * FROM USERS WHERE isAdmin=0 AND role=?";
-    private static final String SELECT_BY_NATIONALITY = "SELECT * FROM USERS WHERE isAdmin=0 AND nationality=?";
-    private static final String SELECT_BY_DB_ID = "SELECT * FROM USERS WHERE isAdmin=0 AND id=?";
     private static final String DELETE_PLAYER = "DELETE FROM USERS WHERE id=?";
-    private static final String INSERT_INTO_USERS = "INSERT INTO USERS(isAdmin,name,username,role,nationality,birthDate,active) VALUES(?,?,?,?,?,?,?)";
-    private static final String UPDATE_USERS = "UPDATE users SET isAdmin=0 , name=? , username=?, role=?, nationality=? ,birthDate=? , active=? WHERE id=?";
+    private static final String INSERT_INTO_USERS = "INSERT INTO USERS(isAdmin,name,username,role,nationality,birthDate,active,team_id) VALUES(?,?,?,?,?,?,?,?)";
+    private static final String UPDATE_USERS = "UPDATE users SET isAdmin=0 , name=? , username=?, role=?, nationality=? ,birthDate=? , active=? , team_id=? WHERE id=?";
     private String CONN_URL;
 
     public PlayerDAOImpl(){
@@ -46,7 +39,7 @@ public class PlayerDAOImpl implements PlayerDAO{
                 Date bd = Date.valueOf(set.getString("birthDate"));
                 toAdd.setBirthDate(bd==null ? LocalDate.ofEpochDay(0) : bd.toLocalDate());
                 TeamDAO teams = new TeamDAOImpl();
-                toAdd.setTeams(FXCollections.observableList(teams.getByPlayerID(toAdd.getId())));
+                toAdd.setTeam(teams.getById(set.getInt("team_id")));
                 toAdd.setActive(set.getInt("active") ==1);
 
                 retval.add(toAdd);
@@ -58,72 +51,33 @@ public class PlayerDAOImpl implements PlayerDAO{
         return retval;
     }
 
-
     @Override
-    public List<Player> findByCurrentTeam(Team team) {
-        return this.findByCurrentTeam(team.getId());
+    public List<Player> findByTeam(Team team) {
+        return findByTeam(team.getId());
     }
 
     @Override
-    public List<Player> findByCurrentTeam(int teamId) {
-        List<Player> retval = new ArrayList<>();
-        try(Connection conn = DriverManager.getConnection(CONN_URL);
-            PreparedStatement statement = conn.prepareStatement(SELECT_BY_CURRENT_TEAM)
-        ){
-            statement.setInt(1,teamId);
-            ResultSet set = statement.executeQuery();
-            while(set.next()){
-                Player toAdd = new Player();
+    public List<Player> findByTeam(int teamId) {
+        List<Player> players = new ArrayList<>();
 
-                toAdd.setId(set.getInt("id"));
-                toAdd.setName(set.getString("name"));
-                toAdd.setUsername(set.getString("username"));
-                toAdd.setRole(set.getString("role"));
-                toAdd.setNationality(set.getString("nationality"));
-                Date bd = Date.valueOf(set.getString("birthDate"));
-                toAdd.setBirthDate(bd == null ? LocalDate.ofEpochDay(0) : bd.toLocalDate());
-                TeamDAO teams = new TeamDAOImpl();
-                toAdd.setTeams(FXCollections.observableList(teams.getByPlayerID(toAdd.getId())));
-                toAdd.setActive(set.getInt("active") == 1);
 
-                retval.add(toAdd);
+        for(Player p : findAll()){
+            if(p.getTeam() != null){
+                if (p.getTeam().getId() == teamId) {
+                    players.add(p);
                 }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            }
         }
-        return retval;
+        return players;
     }
-
-
 
     @Override
     public List<Player> findByRole(String role) {
         List<Player> retval = new ArrayList<>();
-        try(Connection conn = DriverManager.getConnection(CONN_URL);
-            PreparedStatement statement = conn.prepareStatement(SELECT_BY_ROLE)
-        ){
-            statement.setString(1,role);
-            ResultSet set = statement.executeQuery();
-            while(set.next()){
-                Player toAdd = new Player();
-
-                toAdd.setId(set.getInt("id"));
-                toAdd.setName(set.getString("name"));
-                toAdd.setUsername(set.getString("username"));
-                toAdd.setRole(set.getString("role"));
-                toAdd.setNationality(set.getString("nationality"));
-                Date bd = Date.valueOf(set.getString("birthDate"));
-                toAdd.setBirthDate(bd == null ? LocalDate.ofEpochDay(0) : bd.toLocalDate());
-                TeamDAO teams = new TeamDAOImpl();
-                toAdd.setTeams(FXCollections.observableList(teams.getByPlayerID(toAdd.getId())));
-                toAdd.setActive(set.getInt("active") == 1);
-
-                retval.add(toAdd);
+        for(Player p : findAll()){
+            if(p.getRole().equals(role)){
+                retval.add(p);
             }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
         return retval;
     }
@@ -132,30 +86,10 @@ public class PlayerDAOImpl implements PlayerDAO{
     @Override
     public List<Player> findByNationality(String nat) {
         List<Player> retval = new ArrayList<>();
-        try(Connection conn = DriverManager.getConnection(CONN_URL);
-            PreparedStatement statement = conn.prepareStatement(SELECT_BY_NATIONALITY)
-        ){
-            statement.setString(1,nat);
-            ResultSet set = statement.executeQuery();
-            while(set.next()){
-                Player toAdd = new Player();
-
-                toAdd.setId(set.getInt("id"));
-                toAdd.setName(set.getString("name"));
-                toAdd.setUsername(set.getString("username"));
-                toAdd.setRole(set.getString("role"));
-                toAdd.setNationality(set.getString("nationality"));
-                Date bd = Date.valueOf(set.getString("birthDate"));
-                toAdd.setBirthDate(bd == null ? LocalDate.ofEpochDay(0) : bd.toLocalDate());
-                TeamDAO teams = new TeamDAOImpl();
-                toAdd.setTeams(FXCollections.observableList(teams.getByPlayerID(toAdd.getId())));
-                toAdd.setActive(set.getInt("active") == 1);
-
-                retval.add(toAdd);
+        for(Player p : findAll()){
+            if(p.getNationality().equals(nat)){
+                retval.add(p);
             }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
         return retval;
     }
@@ -167,31 +101,12 @@ public class PlayerDAOImpl implements PlayerDAO{
 
     @Override
     public Player findById(int playerId) {
-        Player retval = new Player();
-        try(Connection conn = DriverManager.getConnection(CONN_URL);
-            PreparedStatement statement = conn.prepareStatement(SELECT_BY_DB_ID)
-        ){
-            statement.setInt(1,playerId);
-            ResultSet set = statement.executeQuery();
-            if(set.next()){
-                retval.setId(set.getInt("id"));
-                retval.setName(set.getString("name"));
-                retval.setUsername(set.getString("username"));
-                retval.setRole(set.getString("role"));
-                retval.setNationality(set.getString("nationality"));
-                Date bd = Date.valueOf(set.getString("birthDate"));
-                retval.setBirthDate(bd == null ? LocalDate.ofEpochDay(0) : bd.toLocalDate());
-                TeamDAO teams = new TeamDAOImpl();
-                retval.setTeams(FXCollections.observableList(teams.getByPlayerID(retval.getId())));
-                retval.setActive(set.getInt("active") == 1);
-            }else{
-                return null;
+        for(Player p : findAll()){
+            if(p.getId() == playerId){
+                return p;
             }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
-        return retval;
+        return null;
     }
 
 
@@ -204,7 +119,7 @@ public class PlayerDAOImpl implements PlayerDAO{
                 statement = connection.prepareStatement(INSERT_INTO_USERS,Statement.RETURN_GENERATED_KEYS);
             }else{
                 statement = connection.prepareStatement(UPDATE_USERS);
-                statement.setInt(7,player.getId());
+                statement.setInt(8,player.getId());
             }
 
             statement.setString(1,player.getName());
@@ -213,6 +128,7 @@ public class PlayerDAOImpl implements PlayerDAO{
             statement.setString(4,player.getNationality());
             statement.setString(5,player.getBirthDate().toString());
             statement.setInt(6,player.isActive() ? 1:0);
+            statement.setInt(7,player.getTeam().getId());
 
             int affected = statement.executeUpdate();
             if(affected==0){

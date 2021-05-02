@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 
-<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.alkfejl.controller.AddEditOrg">
+<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="hu.alkfejl.controller.AddEditOrg">
    <columnConstraints>
       <ColumnConstraints minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
       <ColumnConstraints minWidth="10.0" percentWidth="70.0" prefWidth="100.0" />
@@ -21,12 +21,12 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
    </rowConstraints>
    <children>
-      <Button mnemonicParsing="false" text="Button" GridPane.rowIndex="3" />
-      <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Button onAction="#save" mnemonicParsing="false" text="Mentés" GridPane.rowIndex="3" />
+      <Button onAction="#cancel" mnemonicParsing="false" text="Mégse" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <Label text="Org hozzáadása" />
-      <Label text="Név" GridPane.rowIndex="1" />
+      <Label  text="Név" GridPane.rowIndex="1" />
       <Label text="Alapítás dátuma" GridPane.rowIndex="2" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="orgName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <DatePicker fx:id="founded" GridPane.columnIndex="1" GridPane.rowIndex="2" />
    </children>
 </GridPane>

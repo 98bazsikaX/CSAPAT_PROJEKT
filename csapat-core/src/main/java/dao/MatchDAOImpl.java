@@ -1,9 +1,7 @@
 package dao;
 
 import configuration.ProjectConfig;
-import model.Match;
-import model.Team;
-import model.Tournament;
+import model.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -46,6 +44,7 @@ public class MatchDAOImpl implements MatchDAO{
                 toAdd.setLooserScore(set.getInt("looser_score"));
                 toAdd.setWinnerScore(set.getInt("winner_score"));
                 //TODO: csak ennyi? jon a vihar gec
+                //toAdd.setStats();
                 matches.add(toAdd);
             }
 

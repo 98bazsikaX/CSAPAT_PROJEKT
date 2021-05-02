@@ -23,10 +23,10 @@ public class Tournament {
     private IntegerProperty id = new SimpleIntegerProperty(this,"id");
     private ObjectProperty<LocalDate> date = new SimpleObjectProperty(this,"date");
     private StringProperty location = new SimpleStringProperty(this,"location");
+    private StringProperty name = new SimpleStringProperty(this,"name");
     private SimpleObjectProperty<Organization> organizer = new SimpleObjectProperty<>(this,"organizer");
     private SimpleObjectProperty<ObservableList<Team>> teams = new SimpleObjectProperty<>(this,"teams");
     private SimpleObjectProperty<ObservableList<Player>> players = new SimpleObjectProperty<>(this,"players");
-//    private SimpleObjectProperty<Player> mvp = new SimpleObjectProperty<>(this,"mvp");
     private SimpleObjectProperty<Team> winner = new SimpleObjectProperty<>(this,"winner");
     private SimpleObjectProperty<ObservableList<Match>> matches = new SimpleObjectProperty<>(this,"matches");
 
@@ -40,6 +40,18 @@ public class Tournament {
 
     public void setId(int id) {
         this.id.set(id);
+    }
+
+    public String getName() {
+        return name.get();
+    }
+
+    public StringProperty nameProperty() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
     }
 
     public LocalDate getDate() {

@@ -38,7 +38,10 @@ public class AddEditTeam {
         List<String> countryNames = new ArrayList<>();
 
         for(Locale c : countries){
-            if(c.getDisplayCountry().length()>0) countryNames.add(c.getDisplayCountry());
+            if(c.getDisplayCountry().length()!=0){
+                countryNames.add(c.getDisplayCountry());
+            }
+
         }
 
         this.nationality.getItems().addAll(countryNames);

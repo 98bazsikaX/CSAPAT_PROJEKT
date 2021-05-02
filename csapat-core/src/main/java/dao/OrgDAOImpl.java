@@ -84,6 +84,9 @@ public class OrgDAOImpl implements OrgDAO{
                 statement = conn.prepareStatement(UPDATE);
                 statement.setInt(3,org.getId());
             }
+            statement.setString(1,org.getName());
+            statement.setString(2,org.getFoundation().toString());
+
             int affected = statement.executeUpdate();
             if(affected==0){
                 return null;

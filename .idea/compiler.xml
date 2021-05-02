@@ -7,9 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="csapat-desktop" />
+        <module name="webapp" />
         <module name="csapat-core" />
-        <module name="csapat-webapp" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="csapat-webapp" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>

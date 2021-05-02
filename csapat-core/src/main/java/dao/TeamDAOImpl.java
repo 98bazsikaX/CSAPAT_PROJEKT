@@ -1,6 +1,7 @@
 package dao;
 
 import configuration.ProjectConfig;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Player;
 import model.Team;
@@ -17,6 +18,7 @@ public class TeamDAOImpl implements TeamDAO{
     private static final String UPDATE_TEAM = "UPDATE TEAMS SET name=?,nationality=?,founded=? WHERE id=?";
     private static final String DELETE_TEAM = "DELETE FROM TEAMS WHERE id=?";
     private static final String GET_BY_ID = "SELECT * FROM TEAMS WHERE id=?";
+    private static final String OLD_TEAMS = "SELECT * FROM TEAMS INNER JOIN was_in_table wit on TEAMS.id = wit.team_id WHERE player_id=?";
     private String CONN_URL;
     private PlayerDAO player = new PlayerDAOImpl();
 
@@ -38,7 +40,8 @@ public class TeamDAOImpl implements TeamDAO{
                 toadd.setId(set.getInt("id"));
                 toadd.setName(set.getString("name"));
                 toadd.setNationality(set.getString("nationality"));
-                toadd.setPlayers((ObservableList<Player>) player.findByCurrentTeam(toadd.getId()));
+                ObservableList<Player> asd = FXCollections.observableArrayList(player.findByTeam(toadd.getId()));
+                toadd.setPlayers(asd);
 
                 toadd.setFounded(LocalDate.parse(set.getString("founded")));
 
@@ -52,13 +55,18 @@ public class TeamDAOImpl implements TeamDAO{
     }
 
     @Override
-    public List<Team> getByPlayerID(Player player) {
-        return this.getByPlayerID(player.getId());
+    public Team getByPlayer(Player player) {
+        return this.getByPlayer(player.getId());
     }
 
     @Override
-    public List<Team> getByPlayerID(int id) {
-        return new ArrayList<Team>();
+    public Team getByPlayer(int id) {
+        for(Player p : player.findAll()){
+            if(p.getId()==id){
+                return p.getTeam();
+            }
+        }
+        return null;
     }
 
     @Override
@@ -93,6 +101,37 @@ public class TeamDAOImpl implements TeamDAO{
 
 
     @Override
+    public List<Team> oldTeams(Player player) {
+        return oldTeams(player.getId());
+    }
+
+    @Override
+    public List<Team> oldTeams(int id) {
+        List<Team> teams = new ArrayList<>();
+        try (Connection c = DriverManager.getConnection(CONN_URL);
+            PreparedStatement statement = c.prepareStatement(OLD_TEAMS)
+        ){
+            statement.setInt(1,id);
+            ResultSet set = statement.executeQuery();
+            while(set.next()){
+                Team toAdd = new Team();
+                toAdd.setId(set.getInt("id"));
+                toAdd.setName(set.getString("name"));
+                toAdd.setNationality(set.getString("nationality"));
+                Date f = Date.valueOf(set.getString("founded"));
+                toAdd.setFounded(f.toLocalDate());
+
+                teams.add(toAdd);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return teams;
+    }
+
+    @Override
     public Team save(Team team) {
         try(Connection connection = DriverManager.getConnection(CONN_URL)){
             PreparedStatement statement;
@@ -119,7 +158,6 @@ public class TeamDAOImpl implements TeamDAO{
                 }
             }
             statement.close();
-
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

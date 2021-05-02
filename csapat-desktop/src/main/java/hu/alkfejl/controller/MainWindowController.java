@@ -95,6 +95,14 @@ public class MainWindowController implements Initializable {
         App.loadFXML("/fxml/showOrgs.fxml");
     }
 
+    public void showTournaments(){
+        App.loadFXML("/fxml/showTournament.fxml");
+    }
+
+    public void teamHistory(){
+        App.loadFXML("/fxml/teamHistory.fxml");
+    }
+
     @FXML
     private void addPlayer(){
         Player p = new Player();

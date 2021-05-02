@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -13,9 +14,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.alkfejl.controller.AddEditPlayer">
+<GridPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="hu.alkfejl.controller.AddEditPlayer">
    <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" />
       <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" />
       <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" />
       <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" />
@@ -40,9 +42,9 @@
       <Label text="Nemzetiség" GridPane.rowIndex="4" />
       <Label text="Születési dátum" GridPane.rowIndex="5" />
       <Label text="Aktív-e" GridPane.rowIndex="6" />
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.valignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="50.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
          <children>
-            <Button  mnemonicParsing="false" onAction="#savePlayer" text="Mentés" />
+            <Button mnemonicParsing="false" onAction="#savePlayer" text="Mentés" />
             <Button mnemonicParsing="false" onAction="#cancel" text="Mégse" />
          </children>
          <padding>
@@ -52,8 +54,10 @@
       <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <TextField fx:id="username" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <DatePicker fx:id="birthDate" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <CheckBox fx:id="isActive" mnemonicParsing="false" text="Yessir" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <CheckBox onAction="#ActiveAction" fx:id="isActive" mnemonicParsing="false" text="Yessir" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <ChoiceBox fx:id="role" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <ChoiceBox fx:id="nationality" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Label text="Csapat" GridPane.rowIndex="7" />
+      <ComboBox fx:id="teamComboBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
    </children>
 </GridPane>

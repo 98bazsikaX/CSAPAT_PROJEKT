@@ -24,7 +24,7 @@ public class PlayerStatistics {
     private IntegerProperty mvp = new SimpleIntegerProperty(this,"mvp");
     private IntegerProperty adr = new SimpleIntegerProperty(this,"adr");
     private FloatProperty headshotPercentage = new SimpleFloatProperty(this,"headshotPercentage ");
-    //private ObjectProperty<StatType> type = new SimpleObjectProperty<>(this,"type");
+
 
     public int getId() {
         return id.get();
@@ -110,18 +110,29 @@ public class PlayerStatistics {
         this.headshotPercentage.set(headshotPercentage);
     }
 
-
-    /* public StatType getType() {
-        return type.get();
+    public Player getPlayer() {
+        return player.get();
     }
 
-    public ObjectProperty<StatType> typeProperty() {
-        return type;
+    public ObjectProperty<Player> playerProperty() {
+        return player;
     }
 
-    public void setType(StatType type) {
-        this.type.set(type);
-    }*/
+    public void setPlayer(Player player) {
+        this.player.set(player);
+    }
+
+    public Match getMatch() {
+        return match.get();
+    }
+
+    public ObjectProperty<Match> matchProperty() {
+        return match;
+    }
+
+    public void setMatch(Match match) {
+        this.match.set(match);
+    }
 
     public float calculateKd(){
         if(this.deaths.get() == 0){

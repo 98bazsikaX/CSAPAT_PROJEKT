@@ -19,15 +19,11 @@ public class Player extends User{
     *  active (aktiv e a jatekos, vagy epp kispadra van teve)
     * */
 
-
-    //private ObjectProperty<Role> role = new SimpleObjectProperty<>(this,"role");
     private StringProperty role = new SimpleStringProperty(this,"role");
-    private ObjectProperty<ObservableList<Team>> teams = new SimpleObjectProperty<>(this,"teams");
+    private ObjectProperty<Team> team = new SimpleObjectProperty<>(this,"team");
     private BooleanProperty active = new SimpleBooleanProperty(this,"active");
 
-    public Player() {
-        //super.setType(UserType.valueOf("Player"));
-    }
+    public Player() {}
 
 
     public String getRole() {
@@ -42,16 +38,16 @@ public class Player extends User{
         this.role.set(role);
     }
 
-    public ObservableList<Team> getTeams() {
-        return teams.get();
+    public Team getTeam() {
+        return team.get();
     }
 
-    public ObjectProperty<ObservableList<Team>> teamsProperty() {
-        return teams;
+    public ObjectProperty<Team> teamProperty() {
+        return team;
     }
 
-    public void setTeams(ObservableList<Team> teams) {
-        this.teams.set(teams);
+    public void setTeam(Team team) {
+        this.team.set(team);
     }
 
     public boolean isActive() {

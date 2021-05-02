@@ -1,4 +1,0 @@
-TODO: inaktív player, akár nincs csapatban, akár csapatban van
-TODO: tábla arról h mikor melyik csapatban volt/van 1 player
-TODO: isAdmin tábla?????? hogy ne mindenki tudjon turkászni
-TODO: USERS tabla aminel foreign_key/null a nem player a player_id mezoben, illetve h isadmin

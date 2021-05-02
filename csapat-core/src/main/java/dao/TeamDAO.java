@@ -9,11 +9,14 @@ public interface TeamDAO {
 
     List<Team> findAll();
 
-    List<Team> getByPlayerID(Player player);
-    List<Team> getByPlayerID(int id); /*mindig ezt hivjuk meg*/
+    Team getByPlayer(Player player);
+    Team getByPlayer(int id); /*mindig ezt hivjuk meg*/
 
     Team getById(Team team);
     Team getById(int id);
+
+    List<Team> oldTeams(Player player);
+    List<Team> oldTeams(int id);
 
     Team save(Team team);
     void delete(Team team);

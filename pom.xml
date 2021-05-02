@@ -11,7 +11,7 @@
     <modules>
         <module>csapat-core</module>
         <module>csapat-desktop</module>
-        <module>webapp</module>
+        <module>csapat-webapp</module>
     </modules>
 
     <properties>
