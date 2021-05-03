@@ -10,6 +10,20 @@ import java.util.List;
 
 public class MapDAOImpl implements MapDAO {
 
+    private static MapDAOImpl instance;
+
+    public static MapDAOImpl getInstance(){
+        if (instance == null) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
+            instance = new MapDAOImpl();
+        }
+        return instance;
+    }
+
     private static final String FIND_BY_DB_ID = "SELECT * FROM MAPS WHERE id=?";
     private static final String FIND_BY_IG_ID = "SELECT * FROM MAPS WHERE ingame_id=?";
     private static final String FIND_BY_NAME =  "SELECT *FROM MAPS WHERE name=?";

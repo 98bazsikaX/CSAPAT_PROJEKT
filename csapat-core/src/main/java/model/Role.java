@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 
-public enum Role {
+public enum Role { //NEM HASZNALT
     LURK("Lurk"),
     AWP("AWP"),
     ENTRY("Entry fragger"),

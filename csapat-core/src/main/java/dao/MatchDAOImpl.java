@@ -9,6 +9,20 @@ import java.util.List;
 
 public class MatchDAOImpl implements MatchDAO{
 
+    private static MatchDAOImpl instance;
+
+    public static MatchDAOImpl getInstance(){
+        if (instance == null) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
+            instance = new MatchDAOImpl();
+        }
+        return instance;
+    }
+
     private static final String INSERT = "INSERT INTO MATCH(tournament_id, map_id, date, looser, winner, looser_score, winner_score) VALUES (?,?,?,?,?,?,?)";
     private static final String UPDATE = "UPDATE MATCH SET tournament_id=? , map_id=? , date=?, looser=?,winner=?,looser_score=?,winner=? WHERE id=?";
     private static final String DEL = "DELETE FROM MATCH WHERE id=?";
@@ -35,7 +49,8 @@ public class MatchDAOImpl implements MatchDAO{
             while(set.next()){
                 Match toAdd = new Match();
                 toAdd.setId(set.getInt("id"));
-                //TODO: TOURNAMENT DAO
+                TournamentDAO tDao = new TournamentDAOImpl();
+                toAdd.setTournament(tDao.findByMatchID(toAdd.getId()));
                 Date d = Date.valueOf(set.getString("date"));
                 toAdd.setDate(d.toLocalDate());
                 toAdd.setMap(mapGetter.findByDbId(set.getInt("map_id")));
@@ -43,8 +58,6 @@ public class MatchDAOImpl implements MatchDAO{
                 toAdd.setWinner(teamGetter.getById(set.getInt("winner")));
                 toAdd.setLooserScore(set.getInt("looser_score"));
                 toAdd.setWinnerScore(set.getInt("winner_score"));
-                //TODO: csak ennyi? jon a vihar gec
-                //toAdd.setStats();
                 matches.add(toAdd);
             }
 
@@ -97,7 +110,7 @@ public class MatchDAOImpl implements MatchDAO{
         for(Match m : findAll()){
             if(m.getId() == id) return m;
         }
-        return null;
+        return new Match(); //null error maitt
     }
 
     @Override
@@ -110,9 +123,21 @@ public class MatchDAOImpl implements MatchDAO{
                 statement = c.prepareStatement(UPDATE);
                 statement.setInt(8,match.getId());
             }
-
-            //TODO: IMPLEMENT
-
+            statement.setInt(1,match.getTournament().getId());
+            statement.setInt(2,match.getMap().getDbId());
+            statement.setString(3,match.getDate().toString());
+            statement.setInt(4,match.getLooser().getId());
+            statement.setInt(5,match.getWinner().getId());
+            statement.setInt(6,match.getLooserScore());
+            statement.setInt(7,match.getWinnerScore());
+            statement.executeUpdate();
+            if(match.getId()<=0){
+                ResultSet set = statement.getGeneratedKeys();
+                if(set.next()){
+                    match.setId(set.getInt(1));
+                }
+            }
+            statement.close();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

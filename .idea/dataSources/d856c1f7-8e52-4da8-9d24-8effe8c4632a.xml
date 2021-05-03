@@ -1590,57 +1590,65 @@
       <RefColNames>id</RefColNames>
     </foreign-key>
     <trigger id="550" parent="176" name="WAS_IN_TEAM_TRIGGER">
-      <SourceTextLength>199</SourceTextLength>
+      <SourceTextLength>224</SourceTextLength>
       <Turn>after-row</Turn>
       <Events>U</Events>
-      <Condition>old.team_id != new.team_id</Condition>
+      <Condition>old.team_id != new.team_id AND old.team_id IS NOT NULL</Condition>
     </trigger>
     <column id="551" parent="176" name="id">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
+      <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="552" parent="176" name="isAdmin">
+    <column id="552" parent="176" name="name">
       <Position>2</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>0</DefaultExpression>
+      <DataType>text|0s</DataType>
     </column>
-    <column id="553" parent="176" name="name">
+    <column id="553" parent="176" name="username">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="554" parent="176" name="username">
+    <column id="554" parent="176" name="role">
       <Position>4</Position>
-      <DataType>text|0s</DataType>
-    </column>
-    <column id="555" parent="176" name="role">
-      <Position>5</Position>
       <DataType>text|0s</DataType>
       <DefaultExpression>null</DefaultExpression>
     </column>
-    <column id="556" parent="176" name="nationality">
+    <column id="555" parent="176" name="nationality">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="556" parent="176" name="birthDate">
       <Position>6</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="557" parent="176" name="birthDate">
+    <column id="557" parent="176" name="active">
       <Position>7</Position>
-      <DataType>text|0s</DataType>
-    </column>
-    <column id="558" parent="176" name="active">
-      <Position>8</Position>
       <DataType>int|0s</DataType>
       <DefaultExpression>null</DefaultExpression>
     </column>
-    <column id="559" parent="176" name="team_id">
-      <Position>9</Position>
+    <column id="558" parent="176" name="team_id">
+      <Position>8</Position>
       <DataType>integer|0s</DataType>
     </column>
-    <key id="560" parent="176" name="USERS_pk">
+    <column id="559" parent="176" name="email">
+      <Position>9</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <column id="560" parent="176" name="password">
+      <Position>10</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <index id="561" parent="176" name="USERS_username_uindex">
+      <ColNames>username</ColNames>
+      <ColumnCollations></ColumnCollations>
+      <Unique>1</Unique>
+    </index>
+    <key id="562" parent="176" name="USERS_pk">
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="561" parent="176">
+    <foreign-key id="563" parent="176">
       <ColNames>team_id</ColNames>
       <RefTableName>TEAMS</RefTableName>
       <RefKeyName>TEAM_pk</RefKeyName>
@@ -1648,41 +1656,41 @@
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <column id="562" parent="177" name="type">
+    <column id="564" parent="177" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="563" parent="177" name="name">
+    <column id="565" parent="177" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="564" parent="177" name="tbl_name">
+    <column id="566" parent="177" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="565" parent="177" name="rootpage">
+    <column id="567" parent="177" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="566" parent="177" name="sql">
+    <column id="568" parent="177" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="567" parent="178" name="name">
+    <column id="569" parent="178" name="name">
       <Position>1</Position>
     </column>
-    <column id="568" parent="178" name="seq">
+    <column id="570" parent="178" name="seq">
       <Position>2</Position>
     </column>
-    <column id="569" parent="179" name="player_id">
+    <column id="571" parent="179" name="player_id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
     </column>
-    <column id="570" parent="179" name="team_id">
+    <column id="572" parent="179" name="team_id">
       <Position>2</Position>
       <DataType>int|0s</DataType>
     </column>
-    <foreign-key id="571" parent="179">
+    <foreign-key id="573" parent="179">
       <ColNames>player_id</ColNames>
       <RefTableName>USERS</RefTableName>
       <RefKeyName>USERS_pk</RefKeyName>
@@ -1690,7 +1698,7 @@
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
     </foreign-key>
-    <foreign-key id="572" parent="179">
+    <foreign-key id="574" parent="179">
       <ColNames>team_id</ColNames>
       <RefTableName>TEAMS</RefTableName>
       <RefKeyName>TEAM_pk</RefKeyName>

@@ -11,6 +11,19 @@ import java.util.List;
 
 public class StatDAOImpl implements StatsDAO{
 
+    private static StatDAOImpl instance;
+
+    public static StatDAOImpl getInstance() {
+        if (instance == null) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
+            instance = new StatDAOImpl();
+        }
+        return instance;
+    }
 
     private static final String FIND_ALL = "SELECT * FROM STATISTICS";
     private static final String DEL = "DELETE FROM STATISTICS WHERE id=?";
@@ -112,11 +125,7 @@ public class StatDAOImpl implements StatsDAO{
             statement.setInt(6, (int) stat.getHeadshotPercentage());
             statement.setInt(7,stat.getPlayer().getId());
             statement.setInt(8,stat.getMatch().getId());
-
-            int generated = statement.executeUpdate();
-            if(generated==0){
-                return null;
-            }
+            statement.executeUpdate();
 
             if(stat.getId()<=0){
                 ResultSet set = statement.getGeneratedKeys();

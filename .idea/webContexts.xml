@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebContextManager">
+    <option name="state">
+      <map>
+        <entry key="file://$PROJECT_DIR$/csapat-webapp/src/main/webapp/SetMatch.jsp" value="file://$PROJECT_DIR$/csapat-webapp/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/csapat-webapp/src/main/webapp/setEmailPassword.jsp" value="file://$PROJECT_DIR$/csapat-webapp/src/main/webapp" />
+        <entry key="file://$PROJECT_DIR$/csapat-webapp/src/main/webapp/setmatchdetails.jsp" value="file://$PROJECT_DIR$/csapat-webapp/src/main/webapp" />
+      </map>
+    </option>
+  </component>
+</project>

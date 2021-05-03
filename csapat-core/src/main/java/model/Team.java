@@ -17,7 +17,7 @@ public class Team {
     private IntegerProperty id = new SimpleIntegerProperty(this,"id");
     private StringProperty name = new SimpleStringProperty(this,"name");
     private StringProperty nationality = new SimpleStringProperty(this,"nationality");
-    private ObjectProperty<ObservableList<Player>> players = new SimpleObjectProperty<>(this,"players"); //Current players
+    //private ObjectProperty<ObservableList<Player>> players = new SimpleObjectProperty<>(this,"players"); //Current players
     //private IntegerProperty founded = new SimpleIntegerProperty(this,"founded");
 
     private ObjectProperty<LocalDate> founded = new SimpleObjectProperty<>(this,"founded");
@@ -58,17 +58,17 @@ public class Team {
         this.nationality.set(nationality);
     }
 
-    public ObservableList<Player> getPlayers() {
-        return players.get();
-    }
-
-    public ObjectProperty<ObservableList<Player>> playersProperty() {
-        return players;
-    }
-
-    public void setPlayers(ObservableList<Player> players) {
-        this.players.set(players);
-    }
+//    public ObservableList<Player> getPlayers() {
+//        return players.get();
+//    }
+//
+//    public ObjectProperty<ObservableList<Player>> playersProperty() {
+//        return players;
+//    }
+//
+//    public void setPlayers(ObservableList<Player> players) {
+//        this.players.set(players);
+//    }
 
     public LocalDate getFounded() {
         return founded.get();

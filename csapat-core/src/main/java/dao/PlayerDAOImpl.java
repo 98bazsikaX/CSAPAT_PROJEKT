@@ -11,10 +11,25 @@ import java.util.List;
 
 public class PlayerDAOImpl implements PlayerDAO{
 
-    private static final String SELECT_ALL = "SELECT * FROM USERS WHERE isAdmin=0";
+    private static PlayerDAOImpl instance;
+
+    public static PlayerDAOImpl getInstance() {
+        if (instance == null) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
+            instance = new PlayerDAOImpl();
+        }
+        return instance;
+    }
+
+    private static final String SELECT_ALL = "SELECT * FROM USERS";
     private static final String DELETE_PLAYER = "DELETE FROM USERS WHERE id=?";
-    private static final String INSERT_INTO_USERS = "INSERT INTO USERS(isAdmin,name,username,role,nationality,birthDate,active,team_id) VALUES(?,?,?,?,?,?,?,?)";
-    private static final String UPDATE_USERS = "UPDATE users SET isAdmin=0 , name=? , username=?, role=?, nationality=? ,birthDate=? , active=? , team_id=? WHERE id=?";
+    private static final String INSERT_INTO_USERS = "INSERT INTO USERS(name,username,role,nationality,birthDate,active,team_id) VALUES(?,?,?,?,?,?,?)";
+    private static final String UPDATE_USERS = "UPDATE users SET name=? , username=?, role=?, nationality=? ,birthDate=? , active=? , team_id=? WHERE id=?";
+    private static final String SELECT_BY_ID = "SELECT * FROM USERS WHERE id=?";
     private String CONN_URL;
 
     public PlayerDAOImpl(){
@@ -107,6 +122,7 @@ public class PlayerDAOImpl implements PlayerDAO{
             }
         }
         return null;
+//       TODO: eredeti implementacio megunta magat par oraval hatarido elott
     }
 
 

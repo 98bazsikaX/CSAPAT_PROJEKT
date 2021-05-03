@@ -23,7 +23,7 @@ public class PlayerStatistics {
     private IntegerProperty assists = new SimpleIntegerProperty(this,"assists");
     private IntegerProperty mvp = new SimpleIntegerProperty(this,"mvp");
     private IntegerProperty adr = new SimpleIntegerProperty(this,"adr");
-    private FloatProperty headshotPercentage = new SimpleFloatProperty(this,"headshotPercentage ");
+    private IntegerProperty headshotPercentage = new SimpleIntegerProperty(this,"headshotPercentage ");
 
 
     public int getId() {
@@ -98,15 +98,15 @@ public class PlayerStatistics {
         this.adr.set(adr);
     }
 
-    public float getHeadshotPercentage() {
+    public int getHeadshotPercentage() {
         return headshotPercentage.get();
     }
 
-    public FloatProperty headshotPercentageProperty() {
+    public IntegerProperty headshotPercentageProperty() {
         return headshotPercentage;
     }
 
-    public void setHeadshotPercentage(float headshotPercentage) {
+    public void setHeadshotPercentage(int headshotPercentage) {
         this.headshotPercentage.set(headshotPercentage);
     }
 

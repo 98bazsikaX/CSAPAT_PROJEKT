@@ -16,6 +16,8 @@ public interface TournamentDAO {
     List<Tournament> findByWinner(Team team);
     List<Tournament> findByWinner(int id);
 
+    Tournament findById(int id);
+
     Tournament save(Tournament tournament);
     void delete(Tournament tournament);
 

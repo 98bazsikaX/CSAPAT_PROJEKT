@@ -4,15 +4,14 @@ import javafx.beans.property.*;
 
 import java.time.LocalDate;
 
-public abstract class User {
+public class User {
     protected IntegerProperty id = new SimpleIntegerProperty(this,"id");
     protected StringProperty username = new SimpleStringProperty(this,"username");
     protected StringProperty name = new SimpleStringProperty(this,"name");
-    protected BooleanProperty online = new SimpleBooleanProperty(this,"online");
     protected StringProperty nationality = new SimpleStringProperty(this,"nationality");
     protected ObjectProperty<LocalDate> birthDate = new SimpleObjectProperty<>(this, "birthDate");
-   // protected ObjectProperty<UserType> type;
-
+    protected StringProperty password = new SimpleStringProperty(this,"password");
+    protected StringProperty email = new SimpleStringProperty(this,"email");
 
     public int getId() {
         return id.get();
@@ -50,18 +49,6 @@ public abstract class User {
         this.name.set(name);
     }
 
-    public boolean isOnline() {
-        return online.get();
-    }
-
-    public BooleanProperty onlineProperty() {
-        return online;
-    }
-
-    public void setOnline(boolean online) {
-        this.online.set(online);
-    }
-
     public String getNationality() {
         return nationality.get();
     }
@@ -84,5 +71,29 @@ public abstract class User {
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate.set(birthDate);
+    }
+
+    public String getPassword() {
+        return password.get();
+    }
+
+    public StringProperty passwordProperty() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password.set(password);
+    }
+
+    public String getEmail() {
+        return email.get();
+    }
+
+    public StringProperty emailProperty() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email.set(email);
     }
 }

@@ -13,6 +13,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TournamentDAOImpl implements TournamentDAO{
+
+    private static TournamentDAOImpl instance;
+
+    public static TournamentDAOImpl getInstance() {
+        if (instance == null) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
+            instance = new TournamentDAOImpl();
+        }
+        return instance;
+    }
+
+
+
     private static final String SELECT_ALL = "SELECT * FROM TOURNAMENTS";
     private static final String INSERT = "INSERT INTO TOURNAMENTS( name, date, location, orgId, winner_id) VALUES (?,?,?,?,?)";
     private static final String UPDATE = "UPDATE TOURNAMENTS SET name=?,date=?,location=?,orgId=?,winner_id=? where id=?";
@@ -45,8 +62,8 @@ public class TournamentDAOImpl implements TournamentDAO{
                 t.setLocation(set.getString("location"));
                 t.setOrganizer(orgDAO.findByID(set.getInt("orgId")));
                 t.setWinner(teamDAO.getById(set.getInt("winner_id")));
-                ObservableList<Match> matches = FXCollections.observableList(matchDAO.findByTournament(t.getId()));
-                t.setMatches(matches);
+               // ObservableList<Match> matches = FXCollections.observableList(matchDAO.findByTournament(t.getId()));
+               // t.setMatches(matches);
 
                 retval.add(t);
             }
@@ -87,6 +104,16 @@ public class TournamentDAOImpl implements TournamentDAO{
             }
         }
         return retval;
+    }
+
+    @Override
+    public Tournament findById(int id) {
+        for(Tournament t : findAll()){
+            if(t.getId()==id){
+                return t;
+            }
+        }
+        return null;
     }
 
     @Override

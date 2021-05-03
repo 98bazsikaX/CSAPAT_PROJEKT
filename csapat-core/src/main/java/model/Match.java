@@ -27,7 +27,7 @@ public class Match {
     private IntegerProperty winnerScore = new SimpleIntegerProperty(this,"winnerScore");
     private ObjectProperty<Team> looser = new SimpleObjectProperty<>(this,"looser");
     private IntegerProperty looserScore = new SimpleIntegerProperty(this,"looserScore");
-    private ObjectProperty<ObservableMap<Player,PlayerStatistics>> stats = new SimpleObjectProperty<>(this,"stats");
+    //private ObjectProperty<ObservableMap<Player,PlayerStatistics>> stats = new SimpleObjectProperty<>(this,"stats");
 
 
     public int getId() {
@@ -102,17 +102,17 @@ public class Match {
         this.looser.set(looser);
     }
 
-    public ObservableMap<Player, PlayerStatistics> getStats() {
-        return stats.get();
-    }
-
-    public ObjectProperty<ObservableMap<Player, PlayerStatistics>> statsProperty() {
-        return stats;
-    }
-
-    public void setStats(ObservableMap<Player, PlayerStatistics> stats) {
-        this.stats.set(stats);
-    }
+//    public ObservableMap<Player, PlayerStatistics> getStats() {
+//        return stats.get();
+//    }
+//
+//    public ObjectProperty<ObservableMap<Player, PlayerStatistics>> statsProperty() {
+//        return stats;
+//    }
+//
+//    public void setStats(ObservableMap<Player, PlayerStatistics> stats) {
+//        this.stats.set(stats);
+//    }
 
     public int getWinnerScore() {
         return winnerScore.get();

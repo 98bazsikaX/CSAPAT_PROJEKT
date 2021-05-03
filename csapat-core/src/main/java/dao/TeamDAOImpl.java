@@ -13,6 +13,20 @@ import java.util.List;
 
 public class TeamDAOImpl implements TeamDAO{
 
+    private static TeamDAOImpl instance;
+
+    public static TeamDAOImpl getInstance() {
+        if (instance == null) {
+            try {
+                Class.forName("org.sqlite.JDBC");
+            } catch (ClassNotFoundException e1) {
+                e1.printStackTrace();
+            }
+            instance = new TeamDAOImpl();
+        }
+        return instance;
+    }
+
     private static final String SELECT_ALL = "SELECT * FROM TEAMS";
     private static final String INSERT_INTO_TEAMS = "INSERT INTO TEAMS(name, nationality, founded) VALUES (?,?,?)";
     private static final String UPDATE_TEAM = "UPDATE TEAMS SET name=?,nationality=?,founded=? WHERE id=?";
@@ -21,6 +35,7 @@ public class TeamDAOImpl implements TeamDAO{
     private static final String OLD_TEAMS = "SELECT * FROM TEAMS INNER JOIN was_in_table wit on TEAMS.id = wit.team_id WHERE player_id=?";
     private String CONN_URL;
     private PlayerDAO player = new PlayerDAOImpl();
+
 
     public TeamDAOImpl(){
         this.CONN_URL = ProjectConfig.getValue("db.url");
@@ -40,8 +55,8 @@ public class TeamDAOImpl implements TeamDAO{
                 toadd.setId(set.getInt("id"));
                 toadd.setName(set.getString("name"));
                 toadd.setNationality(set.getString("nationality"));
-                ObservableList<Player> asd = FXCollections.observableArrayList(player.findByTeam(toadd.getId()));
-                toadd.setPlayers(asd);
+               // ObservableList<Player> asd = FXCollections.observableArrayList(player.findByTeam(toadd.getId()));
+               // toadd.setPlayers(asd);
 
                 toadd.setFounded(LocalDate.parse(set.getString("founded")));
 
@@ -76,27 +91,12 @@ public class TeamDAOImpl implements TeamDAO{
 
     @Override
     public Team getById(int id) {
-        Team retval = new Team();
-        try(Connection c = DriverManager.getConnection(CONN_URL);
-            PreparedStatement s = c.prepareStatement(GET_BY_ID);
-        ){
-            s.setInt(1,id);
-            ResultSet set = s.executeQuery();
-
-            if(!set.next()){
-                return null;
+        for(Team t : findAll()){
+            if(t.getId() == id){
+                return t;
             }
-                retval.setId(set.getInt("id"));
-                retval.setName(set.getString("name"));
-                retval.setNationality(set.getString("nationality"));
-                Date founded =  Date.valueOf(set.getString("founded"));
-                retval.setFounded(founded.toLocalDate());
-
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
-        return retval;
+        return null;
     }
 
 
